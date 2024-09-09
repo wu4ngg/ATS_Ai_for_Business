@@ -1,0 +1,10 @@
+{
+  "answer": "I am an AI designed to assist with collecting and displaying KPI data for businesses. If you need KPI data or related information, feel free to ask!",
+  "llm_output": {
+    "content": "I am an AI designed to assist with collecting and displaying KPI data for businesses. If you need KPI data or related information, feel free to ask!",
+    "refusal": null,
+    "role": "assistant",
+    "function_call": null,
+    "tool_calls": null
+  }
+}

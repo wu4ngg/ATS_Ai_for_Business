@@ -1,0 +1,1457 @@
+{
+  "flow_runs": [
+    {
+      "run_id": "937f6e32-5d3b-4f30-8657-dd33401a4dc1_0",
+      "status": "Completed",
+      "error": null,
+      "inputs": {
+        "chat_history": [
+          {
+            "inputs": {
+              "question": "What is the weather like in Boston?"
+            },
+            "outputs": {
+              "answer": "{\"forecast\":[\"sunny\",\"windy\"],\"location\":\"Boston\",\"temperature\":\"72\",\"unit\":\"fahrenheit\"}",
+              "llm_output": {
+                "content": null,
+                "function_call": {
+                  "name": "get_current_weather",
+                  "arguments": "{\n  \"location\": \"Boston\"\n}"
+                },
+                "role": "assistant"
+              }
+            }
+          },
+          {
+            "inputs": {
+              "question": "give kpi"
+            },
+            "outputs": {
+              "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}",
+              "llm_output": {
+                "content": null,
+                "refusal": null,
+                "role": "assistant",
+                "function_call": {
+                  "arguments": "{}",
+                  "name": "get_data"
+                },
+                "tool_calls": null
+              }
+            }
+          }
+        ],
+        "question": "give kpi of HR department"
+      },
+      "output": {
+        "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3,\"3\":4,\"4\":5,\"5\":6,\"6\":7,\"7\":8,\"8\":9,\"9\":10,\"10\":11,\"11\":12},\"Date\":{\"0\":\"01\\/08\\/2024\",\"1\":\"01\\/08\\/2024\",\"2\":\"01\\/08\\/2024\",\"3\":\"01\\/08\\/2024\",\"4\":\"08\\/08\\/2024\",\"5\":\"08\\/08\\/2024\",\"6\":\"08\\/08\\/2024\",\"7\":\"08\\/08\\/2024\",\"8\":\"08\\/08\\/2023\",\"9\":\"08\\/08\\/2023\",\"10\":\"08\\/08\\/2023\",\"11\":\"08\\/08\\/2023\"},\"KPI\":{\"0\":\"Employee Retention\",\"1\":\"New Hires\",\"2\":\"Training Hours\",\"3\":\"Employee Satisfaction\",\"4\":\"Employee Retention\",\"5\":\"New Hires\",\"6\":\"Training Hours\",\"7\":\"Employee Satisfaction\",\"8\":\"Employee Retention\",\"9\":\"New Hires\",\"10\":\"Training Hours\",\"11\":\"Employee Satisfaction\"},\"Unit\":{\"0\":\"Percent\",\"1\":\"People\",\"2\":\"Hour\",\"3\":\"Percent\",\"4\":\"Percent\",\"5\":\"People\",\"6\":\"Hour\",\"7\":\"Percent\",\"8\":\"Percent\",\"9\":\"People\",\"10\":\"Hour\",\"11\":\"Percent\"},\"Target\":{\"0\":98,\"1\":10,\"2\":30,\"3\":85,\"4\":51,\"5\":49,\"6\":47,\"7\":100,\"8\":43,\"9\":41,\"10\":39,\"11\":100},\"Actual\":{\"0\":97,\"1\":8,\"2\":20,\"3\":80,\"4\":41,\"5\":37,\"6\":33,\"7\":29,\"8\":40,\"9\":20,\"10\":18,\"11\":50},\"Pecentage\":{\"0\":0.9897959184,\"1\":0.8,\"2\":0.6666666667,\"3\":0.9411764706,\"4\":0.8039215686,\"5\":0.7551020408,\"6\":0.7021276596,\"7\":0.29,\"8\":0.9302325581,\"9\":0.487804878,\"10\":0.4615384615,\"11\":0.5}}",
+        "llm_output": {
+          "content": null,
+          "refusal": null,
+          "role": "assistant",
+          "function_call": {
+            "arguments": "{\"name\":\"HR\"}",
+            "name": "get_dep_data"
+          },
+          "tool_calls": null
+        }
+      },
+      "metrics": null,
+      "request": null,
+      "parent_run_id": "937f6e32-5d3b-4f30-8657-dd33401a4dc1",
+      "root_run_id": "937f6e32-5d3b-4f30-8657-dd33401a4dc1",
+      "source_run_id": null,
+      "flow_id": "use_functions_with_chat_models",
+      "start_time": "2024-09-06T01:30:22.109454Z",
+      "end_time": "2024-09-06T01:30:25.275405Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "flow",
+          "node_name": "flow",
+          "type": "Flow",
+          "start_time": 1725561022.109454,
+          "end_time": 1725561025.275405,
+          "children": [
+            {
+              "name": "AzureOpenAI.chat",
+              "type": "Function",
+              "inputs": {
+                "prompt": "# system:\nYou are an AI that collect KPI data for bussiness by running read file function. When you are asked for KPI, you run the function without any parameter.\nBecause the data is a KPI report in json, you must display it in table or readable format.\n\n{% for item in chat_history %}\n# user:\n{{item.inputs.question}}\n\n{% if 'function_call' in item.outputs.llm_output and item.outputs.llm_output.function_call is not none %}\n# assistant:\nFunction generation requested, function = {{item.outputs.llm_output.function_call.name}}, args = {{item.outputs.llm_output.function_call.arguments}}\n\n# function:\n## name:\n{{item.outputs.llm_output.function_call.name}}\n## content:\n{{item.outputs.answer}}\n\n{% else %}\n# assistant:\n{{item.outputs.llm_output}}\n\n{% endif %}\n\n{% endfor %}\n\n# user:\n{{question}}",
+                "deployment_name": "AI_for_Business",
+                "temperature": 0.7,
+                "top_p": 1.0,
+                "response_format": {
+                  "type": "text"
+                },
+                "functions": [
+                  {
+                    "name": "get_data",
+                    "description": "Get KPI data",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {},
+                      "required": []
+                    }
+                  },
+                  {
+                    "name": "get_prediction_data",
+                    "description": "Get prediction KPI data",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {},
+                      "required": []
+                    }
+                  },
+                  {
+                    "name": "get_dep_data",
+                    "description": "Get dep data",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Input name of dep"
+                        }
+                      },
+                      "required": [
+                        "name"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "get_date_data",
+                    "description": "Get KPI data by date",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "description": "Input the date in format dd/MM/yyyy"
+                        },
+                        "dep": {
+                          "type": "string",
+                          "description": "Department code"
+                        }
+                      },
+                      "required": [
+                        "date",
+                        "dep"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "get_month_of_year_data",
+                    "description": "Get KPI data by month",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "month": {
+                          "type": "string",
+                          "description": "Input the month"
+                        },
+                        "year": {
+                          "type": "string",
+                          "description": "Input the year"
+                        },
+                        "dep": {
+                          "type": "string",
+                          "description": "Department code"
+                        }
+                      },
+                      "required": [
+                        "month",
+                        "year",
+                        "dep"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "get_year_data",
+                    "description": "Get KPI data by year",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "year": {
+                          "type": "string",
+                          "description": "Input the year"
+                        },
+                        "dep": {
+                          "type": "string",
+                          "description": "Department code"
+                        }
+                      },
+                      "required": [
+                        "year",
+                        "dep"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "get_quarter_data",
+                    "description": "Get KPI data by quarter",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "year": {
+                          "type": "string",
+                          "description": "Input the year"
+                        },
+                        "quarter": {
+                          "type": "string",
+                          "description": "Input the quarter (e.g., 1, 2, etc.)"
+                        },
+                        "dep": {
+                          "type": "string",
+                          "description": "Department code"
+                        }
+                      },
+                      "required": [
+                        "year",
+                        "quarter",
+                        "dep"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "send_email_with_attachment",
+                    "description": "send email",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {},
+                      "required": []
+                    }
+                  }
+                ],
+                "function_call": "auto",
+                "chat_history": [
+                  {
+                    "inputs": {
+                      "question": "What is the weather like in Boston?"
+                    },
+                    "outputs": {
+                      "answer": "{\"forecast\":[\"sunny\",\"windy\"],\"location\":\"Boston\",\"temperature\":\"72\",\"unit\":\"fahrenheit\"}",
+                      "llm_output": {
+                        "content": null,
+                        "function_call": {
+                          "name": "get_current_weather",
+                          "arguments": "{\n  \"location\": \"Boston\"\n}"
+                        },
+                        "role": "assistant"
+                      }
+                    }
+                  },
+                  {
+                    "inputs": {
+                      "question": "give kpi"
+                    },
+                    "outputs": {
+                      "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}",
+                      "llm_output": {
+                        "content": null,
+                        "refusal": null,
+                        "role": "assistant",
+                        "function_call": {
+                          "arguments": "{}",
+                          "name": "get_data"
+                        },
+                        "tool_calls": null
+                      }
+                    }
+                  }
+                ],
+                "question": "give kpi of HR department",
+                "_inputs_to_escape": [
+                  "chat_history",
+                  "question"
+                ]
+              },
+              "output": {
+                "content": null,
+                "refusal": null,
+                "role": "assistant",
+                "function_call": {
+                  "arguments": "{\"name\":\"HR\"}",
+                  "name": "get_dep_data"
+                },
+                "tool_calls": null
+              },
+              "start_time": 1725561022.112037,
+              "end_time": 1725561023.400405,
+              "error": null,
+              "children": [
+                {
+                  "name": "openai_chat",
+                  "type": "LLM",
+                  "inputs": {
+                    "model": "AI_for_Business",
+                    "messages": [
+                      {
+                        "role": "system",
+                        "content": "You are an AI that collect KPI data for bussiness by running read file function. When you are asked for KPI, you run the function without any parameter.\nBecause the data is a KPI report in json, you must display it in table or readable format."
+                      },
+                      {
+                        "role": "user",
+                        "content": "What is the weather like in Boston?"
+                      },
+                      {
+                        "role": "assistant",
+                        "content": "Function generation requested, function = get_current_weather, args = {\n  \"location\": \"Boston\"\n}"
+                      },
+                      {
+                        "role": "function",
+                        "name": "get_current_weather",
+                        "content": "{\"forecast\":[\"sunny\",\"windy\"],\"location\":\"Boston\",\"temperature\":\"72\",\"unit\":\"fahrenheit\"}"
+                      },
+                      {
+                        "role": "user",
+                        "content": "give kpi"
+                      },
+                      {
+                        "role": "assistant",
+                        "content": "Function generation requested, function = get_data, args = {}"
+                      },
+                      {
+                        "role": "function",
+                        "name": "get_data",
+                        "content": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}"
+                      },
+                      {
+                        "role": "user",
+                        "content": "give kpi of HR department"
+                      }
+                    ],
+                    "temperature": 0.7,
+                    "top_p": 1.0,
+                    "n": 1,
+                    "stream": false,
+                    "presence_penalty": 0.0,
+                    "frequency_penalty": 0.0,
+                    "user": "",
+                    "functions": [
+                      {
+                        "name": "get_data",
+                        "description": "Get KPI data",
+                        "parameters": {
+                          "type": "object",
+                          "properties": {},
+                          "required": []
+                        }
+                      },
+                      {
+                        "name": "get_prediction_data",
+                        "description": "Get prediction KPI data",
+                        "parameters": {
+                          "type": "object",
+                          "properties": {},
+                          "required": []
+                        }
+                      },
+                      {
+                        "name": "get_dep_data",
+                        "description": "Get dep data",
+                        "parameters": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Input name of dep"
+                            }
+                          },
+                          "required": [
+                            "name"
+                          ]
+                        }
+                      },
+                      {
+                        "name": "get_date_data",
+                        "description": "Get KPI data by date",
+                        "parameters": {
+                          "type": "object",
+                          "properties": {
+                            "date": {
+                              "type": "string",
+                              "description": "Input the date in format dd/MM/yyyy"
+                            },
+                            "dep": {
+                              "type": "string",
+                              "description": "Department code"
+                            }
+                          },
+                          "required": [
+                            "date",
+                            "dep"
+                          ]
+                        }
+                      },
+                      {
+                        "name": "get_month_of_year_data",
+                        "description": "Get KPI data by month",
+                        "parameters": {
+                          "type": "object",
+                          "properties": {
+                            "month": {
+                              "type": "string",
+                              "description": "Input the month"
+                            },
+                            "year": {
+                              "type": "string",
+                              "description": "Input the year"
+                            },
+                            "dep": {
+                              "type": "string",
+                              "description": "Department code"
+                            }
+                          },
+                          "required": [
+                            "month",
+                            "year",
+                            "dep"
+                          ]
+                        }
+                      },
+                      {
+                        "name": "get_year_data",
+                        "description": "Get KPI data by year",
+                        "parameters": {
+                          "type": "object",
+                          "properties": {
+                            "year": {
+                              "type": "string",
+                              "description": "Input the year"
+                            },
+                            "dep": {
+                              "type": "string",
+                              "description": "Department code"
+                            }
+                          },
+                          "required": [
+                            "year",
+                            "dep"
+                          ]
+                        }
+                      },
+                      {
+                        "name": "get_quarter_data",
+                        "description": "Get KPI data by quarter",
+                        "parameters": {
+                          "type": "object",
+                          "properties": {
+                            "year": {
+                              "type": "string",
+                              "description": "Input the year"
+                            },
+                            "quarter": {
+                              "type": "string",
+                              "description": "Input the quarter (e.g., 1, 2, etc.)"
+                            },
+                            "dep": {
+                              "type": "string",
+                              "description": "Department code"
+                            }
+                          },
+                          "required": [
+                            "year",
+                            "quarter",
+                            "dep"
+                          ]
+                        }
+                      },
+                      {
+                        "name": "send_email_with_attachment",
+                        "description": "send email",
+                        "parameters": {
+                          "type": "object",
+                          "properties": {},
+                          "required": []
+                        }
+                      }
+                    ],
+                    "function_call": "auto",
+                    "response_format": {
+                      "type": "text"
+                    }
+                  },
+                  "output": {
+                    "id": "chatcmpl-A4I5n4qE4ilJoNt3fD7mZRo6u86CI",
+                    "choices": [
+                      {
+                        "finish_reason": "function_call",
+                        "index": 0,
+                        "logprobs": null,
+                        "message": {
+                          "content": null,
+                          "refusal": null,
+                          "role": "assistant",
+                          "function_call": {
+                            "arguments": "{\"name\":\"HR\"}",
+                            "name": "get_dep_data"
+                          },
+                          "tool_calls": null
+                        },
+                        "content_filter_results": {}
+                      }
+                    ],
+                    "created": 1725586223,
+                    "model": "gpt-4o-2024-05-13",
+                    "object": "chat.completion",
+                    "service_tier": null,
+                    "system_fingerprint": "fp_abc28019ad",
+                    "usage": {
+                      "completion_tokens": 15,
+                      "prompt_tokens": 539,
+                      "total_tokens": 554
+                    },
+                    "prompt_filter_results": [
+                      {
+                        "prompt_index": 0,
+                        "content_filter_results": {
+                          "hate": {
+                            "filtered": false,
+                            "severity": "safe"
+                          },
+                          "jailbreak": {
+                            "filtered": false,
+                            "detected": false
+                          },
+                          "self_harm": {
+                            "filtered": false,
+                            "severity": "safe"
+                          },
+                          "sexual": {
+                            "filtered": false,
+                            "severity": "safe"
+                          },
+                          "violence": {
+                            "filtered": false,
+                            "severity": "safe"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "start_time": 1725561022.118055,
+                  "end_time": 1725561023.399846,
+                  "error": null,
+                  "children": [],
+                  "node_name": null,
+                  "parent_id": "ffd285ac-c7fb-4576-862f-0f8c786b677c",
+                  "id": "30d9bdab-30ae-4d65-ad4d-1a763bc87959",
+                  "function": "openai.resources.chat.completions.Completions.create",
+                  "system_metrics": {
+                    "completion_tokens": 15,
+                    "prompt_tokens": 539,
+                    "total_tokens": 554
+                  }
+                }
+              ],
+              "node_name": "use_functions_with_chat_models",
+              "parent_id": "",
+              "id": "ffd285ac-c7fb-4576-862f-0f8c786b677c",
+              "function": "AzureOpenAI.chat",
+              "system_metrics": {
+                "completion_tokens": 15,
+                "prompt_tokens": 539,
+                "total_tokens": 554
+              }
+            },
+            {
+              "name": "run_function",
+              "type": "Function",
+              "inputs": {
+                "response_message": {
+                  "content": null,
+                  "refusal": null,
+                  "role": "assistant",
+                  "function_call": {
+                    "arguments": "{\"name\":\"HR\"}",
+                    "name": "get_dep_data"
+                  },
+                  "tool_calls": null
+                }
+              },
+              "output": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3,\"3\":4,\"4\":5,\"5\":6,\"6\":7,\"7\":8,\"8\":9,\"9\":10,\"10\":11,\"11\":12},\"Date\":{\"0\":\"01\\/08\\/2024\",\"1\":\"01\\/08\\/2024\",\"2\":\"01\\/08\\/2024\",\"3\":\"01\\/08\\/2024\",\"4\":\"08\\/08\\/2024\",\"5\":\"08\\/08\\/2024\",\"6\":\"08\\/08\\/2024\",\"7\":\"08\\/08\\/2024\",\"8\":\"08\\/08\\/2023\",\"9\":\"08\\/08\\/2023\",\"10\":\"08\\/08\\/2023\",\"11\":\"08\\/08\\/2023\"},\"KPI\":{\"0\":\"Employee Retention\",\"1\":\"New Hires\",\"2\":\"Training Hours\",\"3\":\"Employee Satisfaction\",\"4\":\"Employee Retention\",\"5\":\"New Hires\",\"6\":\"Training Hours\",\"7\":\"Employee Satisfaction\",\"8\":\"Employee Retention\",\"9\":\"New Hires\",\"10\":\"Training Hours\",\"11\":\"Employee Satisfaction\"},\"Unit\":{\"0\":\"Percent\",\"1\":\"People\",\"2\":\"Hour\",\"3\":\"Percent\",\"4\":\"Percent\",\"5\":\"People\",\"6\":\"Hour\",\"7\":\"Percent\",\"8\":\"Percent\",\"9\":\"People\",\"10\":\"Hour\",\"11\":\"Percent\"},\"Target\":{\"0\":98,\"1\":10,\"2\":30,\"3\":85,\"4\":51,\"5\":49,\"6\":47,\"7\":100,\"8\":43,\"9\":41,\"10\":39,\"11\":100},\"Actual\":{\"0\":97,\"1\":8,\"2\":20,\"3\":80,\"4\":41,\"5\":37,\"6\":33,\"7\":29,\"8\":40,\"9\":20,\"10\":18,\"11\":50},\"Pecentage\":{\"0\":0.9897959184,\"1\":0.8,\"2\":0.6666666667,\"3\":0.9411764706,\"4\":0.8039215686,\"5\":0.7551020408,\"6\":0.7021276596,\"7\":0.29,\"8\":0.9302325581,\"9\":0.487804878,\"10\":0.4615384615,\"11\":0.5}}",
+              "start_time": 1725561023.407183,
+              "end_time": 1725561025.274537,
+              "error": null,
+              "children": [],
+              "node_name": "run_function",
+              "parent_id": "",
+              "id": "ac7dc1e4-b154-41fa-8a63-c35a05bea4e9",
+              "function": "run_function",
+              "system_metrics": {}
+            }
+          ],
+          "system_metrics": {
+            "duration": 3.165951,
+            "prompt_tokens": 539,
+            "completion_tokens": 15,
+            "total_tokens": 554
+          },
+          "inputs": {
+            "chat_history": [
+              {
+                "inputs": {
+                  "question": "What is the weather like in Boston?"
+                },
+                "outputs": {
+                  "answer": "{\"forecast\":[\"sunny\",\"windy\"],\"location\":\"Boston\",\"temperature\":\"72\",\"unit\":\"fahrenheit\"}",
+                  "llm_output": {
+                    "content": null,
+                    "function_call": {
+                      "name": "get_current_weather",
+                      "arguments": "{\n  \"location\": \"Boston\"\n}"
+                    },
+                    "role": "assistant"
+                  }
+                }
+              },
+              {
+                "inputs": {
+                  "question": "give kpi"
+                },
+                "outputs": {
+                  "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}",
+                  "llm_output": {
+                    "content": null,
+                    "refusal": null,
+                    "role": "assistant",
+                    "function_call": {
+                      "arguments": "{}",
+                      "name": "get_data"
+                    },
+                    "tool_calls": null
+                  }
+                }
+              }
+            ],
+            "question": "give kpi of HR department"
+          },
+          "output": {
+            "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3,\"3\":4,\"4\":5,\"5\":6,\"6\":7,\"7\":8,\"8\":9,\"9\":10,\"10\":11,\"11\":12},\"Date\":{\"0\":\"01\\/08\\/2024\",\"1\":\"01\\/08\\/2024\",\"2\":\"01\\/08\\/2024\",\"3\":\"01\\/08\\/2024\",\"4\":\"08\\/08\\/2024\",\"5\":\"08\\/08\\/2024\",\"6\":\"08\\/08\\/2024\",\"7\":\"08\\/08\\/2024\",\"8\":\"08\\/08\\/2023\",\"9\":\"08\\/08\\/2023\",\"10\":\"08\\/08\\/2023\",\"11\":\"08\\/08\\/2023\"},\"KPI\":{\"0\":\"Employee Retention\",\"1\":\"New Hires\",\"2\":\"Training Hours\",\"3\":\"Employee Satisfaction\",\"4\":\"Employee Retention\",\"5\":\"New Hires\",\"6\":\"Training Hours\",\"7\":\"Employee Satisfaction\",\"8\":\"Employee Retention\",\"9\":\"New Hires\",\"10\":\"Training Hours\",\"11\":\"Employee Satisfaction\"},\"Unit\":{\"0\":\"Percent\",\"1\":\"People\",\"2\":\"Hour\",\"3\":\"Percent\",\"4\":\"Percent\",\"5\":\"People\",\"6\":\"Hour\",\"7\":\"Percent\",\"8\":\"Percent\",\"9\":\"People\",\"10\":\"Hour\",\"11\":\"Percent\"},\"Target\":{\"0\":98,\"1\":10,\"2\":30,\"3\":85,\"4\":51,\"5\":49,\"6\":47,\"7\":100,\"8\":43,\"9\":41,\"10\":39,\"11\":100},\"Actual\":{\"0\":97,\"1\":8,\"2\":20,\"3\":80,\"4\":41,\"5\":37,\"6\":33,\"7\":29,\"8\":40,\"9\":20,\"10\":18,\"11\":50},\"Pecentage\":{\"0\":0.9897959184,\"1\":0.8,\"2\":0.6666666667,\"3\":0.9411764706,\"4\":0.8039215686,\"5\":0.7551020408,\"6\":0.7021276596,\"7\":0.29,\"8\":0.9302325581,\"9\":0.487804878,\"10\":0.4615384615,\"11\":0.5}}",
+            "llm_output": {
+              "content": null,
+              "refusal": null,
+              "role": "assistant",
+              "function_call": {
+                "arguments": "{\"name\":\"HR\"}",
+                "name": "get_dep_data"
+              },
+              "tool_calls": null
+            }
+          },
+          "error": null
+        }
+      ],
+      "name": "",
+      "description": "",
+      "tags": null,
+      "system_metrics": {
+        "duration": 3.165951,
+        "prompt_tokens": 539,
+        "completion_tokens": 15,
+        "total_tokens": 554
+      },
+      "result": {
+        "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3,\"3\":4,\"4\":5,\"5\":6,\"6\":7,\"7\":8,\"8\":9,\"9\":10,\"10\":11,\"11\":12},\"Date\":{\"0\":\"01\\/08\\/2024\",\"1\":\"01\\/08\\/2024\",\"2\":\"01\\/08\\/2024\",\"3\":\"01\\/08\\/2024\",\"4\":\"08\\/08\\/2024\",\"5\":\"08\\/08\\/2024\",\"6\":\"08\\/08\\/2024\",\"7\":\"08\\/08\\/2024\",\"8\":\"08\\/08\\/2023\",\"9\":\"08\\/08\\/2023\",\"10\":\"08\\/08\\/2023\",\"11\":\"08\\/08\\/2023\"},\"KPI\":{\"0\":\"Employee Retention\",\"1\":\"New Hires\",\"2\":\"Training Hours\",\"3\":\"Employee Satisfaction\",\"4\":\"Employee Retention\",\"5\":\"New Hires\",\"6\":\"Training Hours\",\"7\":\"Employee Satisfaction\",\"8\":\"Employee Retention\",\"9\":\"New Hires\",\"10\":\"Training Hours\",\"11\":\"Employee Satisfaction\"},\"Unit\":{\"0\":\"Percent\",\"1\":\"People\",\"2\":\"Hour\",\"3\":\"Percent\",\"4\":\"Percent\",\"5\":\"People\",\"6\":\"Hour\",\"7\":\"Percent\",\"8\":\"Percent\",\"9\":\"People\",\"10\":\"Hour\",\"11\":\"Percent\"},\"Target\":{\"0\":98,\"1\":10,\"2\":30,\"3\":85,\"4\":51,\"5\":49,\"6\":47,\"7\":100,\"8\":43,\"9\":41,\"10\":39,\"11\":100},\"Actual\":{\"0\":97,\"1\":8,\"2\":20,\"3\":80,\"4\":41,\"5\":37,\"6\":33,\"7\":29,\"8\":40,\"9\":20,\"10\":18,\"11\":50},\"Pecentage\":{\"0\":0.9897959184,\"1\":0.8,\"2\":0.6666666667,\"3\":0.9411764706,\"4\":0.8039215686,\"5\":0.7551020408,\"6\":0.7021276596,\"7\":0.29,\"8\":0.9302325581,\"9\":0.487804878,\"10\":0.4615384615,\"11\":0.5}}",
+        "llm_output": {
+          "content": null,
+          "refusal": null,
+          "role": "assistant",
+          "function_call": {
+            "arguments": "{\"name\":\"HR\"}",
+            "name": "get_dep_data"
+          },
+          "tool_calls": null
+        }
+      },
+      "upload_metrics": false,
+      "otel_trace_id": "0x9024adb351915e77fcf661f3216b6fd0",
+      "message_format": "basic"
+    }
+  ],
+  "node_runs": [
+    {
+      "node": "use_functions_with_chat_models",
+      "flow_run_id": "937f6e32-5d3b-4f30-8657-dd33401a4dc1",
+      "run_id": "937f6e32-5d3b-4f30-8657-dd33401a4dc1_use_functions_with_chat_models_0",
+      "status": "Completed",
+      "inputs": {
+        "deployment_name": "AI_for_Business",
+        "temperature": 0.7,
+        "top_p": 1.0,
+        "response_format": {
+          "type": "text"
+        },
+        "functions": [
+          {
+            "name": "get_data",
+            "description": "Get KPI data",
+            "parameters": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          },
+          {
+            "name": "get_prediction_data",
+            "description": "Get prediction KPI data",
+            "parameters": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          },
+          {
+            "name": "get_dep_data",
+            "description": "Get dep data",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Input name of dep"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          },
+          {
+            "name": "get_date_data",
+            "description": "Get KPI data by date",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "description": "Input the date in format dd/MM/yyyy"
+                },
+                "dep": {
+                  "type": "string",
+                  "description": "Department code"
+                }
+              },
+              "required": [
+                "date",
+                "dep"
+              ]
+            }
+          },
+          {
+            "name": "get_month_of_year_data",
+            "description": "Get KPI data by month",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "month": {
+                  "type": "string",
+                  "description": "Input the month"
+                },
+                "year": {
+                  "type": "string",
+                  "description": "Input the year"
+                },
+                "dep": {
+                  "type": "string",
+                  "description": "Department code"
+                }
+              },
+              "required": [
+                "month",
+                "year",
+                "dep"
+              ]
+            }
+          },
+          {
+            "name": "get_year_data",
+            "description": "Get KPI data by year",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "year": {
+                  "type": "string",
+                  "description": "Input the year"
+                },
+                "dep": {
+                  "type": "string",
+                  "description": "Department code"
+                }
+              },
+              "required": [
+                "year",
+                "dep"
+              ]
+            }
+          },
+          {
+            "name": "get_quarter_data",
+            "description": "Get KPI data by quarter",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "year": {
+                  "type": "string",
+                  "description": "Input the year"
+                },
+                "quarter": {
+                  "type": "string",
+                  "description": "Input the quarter (e.g., 1, 2, etc.)"
+                },
+                "dep": {
+                  "type": "string",
+                  "description": "Department code"
+                }
+              },
+              "required": [
+                "year",
+                "quarter",
+                "dep"
+              ]
+            }
+          },
+          {
+            "name": "send_email_with_attachment",
+            "description": "send email",
+            "parameters": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        ],
+        "function_call": "auto",
+        "chat_history": [
+          {
+            "inputs": {
+              "question": "What is the weather like in Boston?"
+            },
+            "outputs": {
+              "answer": "{\"forecast\":[\"sunny\",\"windy\"],\"location\":\"Boston\",\"temperature\":\"72\",\"unit\":\"fahrenheit\"}",
+              "llm_output": {
+                "content": null,
+                "function_call": {
+                  "name": "get_current_weather",
+                  "arguments": "{\n  \"location\": \"Boston\"\n}"
+                },
+                "role": "assistant"
+              }
+            }
+          },
+          {
+            "inputs": {
+              "question": "give kpi"
+            },
+            "outputs": {
+              "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}",
+              "llm_output": {
+                "content": null,
+                "refusal": null,
+                "role": "assistant",
+                "function_call": {
+                  "arguments": "{}",
+                  "name": "get_data"
+                },
+                "tool_calls": null
+              }
+            }
+          }
+        ],
+        "question": "give kpi of HR department",
+        "_inputs_to_escape": [
+          "chat_history",
+          "question"
+        ]
+      },
+      "output": {
+        "content": null,
+        "refusal": null,
+        "role": "assistant",
+        "function_call": {
+          "arguments": "{\"name\":\"HR\"}",
+          "name": "get_dep_data"
+        },
+        "tool_calls": null
+      },
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "937f6e32-5d3b-4f30-8657-dd33401a4dc1_0",
+      "start_time": "2024-09-06T01:30:22.111939Z",
+      "end_time": "2024-09-06T01:30:23.405941Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "AzureOpenAI.chat",
+          "type": "Function",
+          "inputs": {
+            "prompt": "# system:\nYou are an AI that collect KPI data for bussiness by running read file function. When you are asked for KPI, you run the function without any parameter.\nBecause the data is a KPI report in json, you must display it in table or readable format.\n\n{% for item in chat_history %}\n# user:\n{{item.inputs.question}}\n\n{% if 'function_call' in item.outputs.llm_output and item.outputs.llm_output.function_call is not none %}\n# assistant:\nFunction generation requested, function = {{item.outputs.llm_output.function_call.name}}, args = {{item.outputs.llm_output.function_call.arguments}}\n\n# function:\n## name:\n{{item.outputs.llm_output.function_call.name}}\n## content:\n{{item.outputs.answer}}\n\n{% else %}\n# assistant:\n{{item.outputs.llm_output}}\n\n{% endif %}\n\n{% endfor %}\n\n# user:\n{{question}}",
+            "deployment_name": "AI_for_Business",
+            "temperature": 0.7,
+            "top_p": 1.0,
+            "response_format": {
+              "type": "text"
+            },
+            "functions": [
+              {
+                "name": "get_data",
+                "description": "Get KPI data",
+                "parameters": {
+                  "type": "object",
+                  "properties": {},
+                  "required": []
+                }
+              },
+              {
+                "name": "get_prediction_data",
+                "description": "Get prediction KPI data",
+                "parameters": {
+                  "type": "object",
+                  "properties": {},
+                  "required": []
+                }
+              },
+              {
+                "name": "get_dep_data",
+                "description": "Get dep data",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Input name of dep"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ]
+                }
+              },
+              {
+                "name": "get_date_data",
+                "description": "Get KPI data by date",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "description": "Input the date in format dd/MM/yyyy"
+                    },
+                    "dep": {
+                      "type": "string",
+                      "description": "Department code"
+                    }
+                  },
+                  "required": [
+                    "date",
+                    "dep"
+                  ]
+                }
+              },
+              {
+                "name": "get_month_of_year_data",
+                "description": "Get KPI data by month",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "month": {
+                      "type": "string",
+                      "description": "Input the month"
+                    },
+                    "year": {
+                      "type": "string",
+                      "description": "Input the year"
+                    },
+                    "dep": {
+                      "type": "string",
+                      "description": "Department code"
+                    }
+                  },
+                  "required": [
+                    "month",
+                    "year",
+                    "dep"
+                  ]
+                }
+              },
+              {
+                "name": "get_year_data",
+                "description": "Get KPI data by year",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "year": {
+                      "type": "string",
+                      "description": "Input the year"
+                    },
+                    "dep": {
+                      "type": "string",
+                      "description": "Department code"
+                    }
+                  },
+                  "required": [
+                    "year",
+                    "dep"
+                  ]
+                }
+              },
+              {
+                "name": "get_quarter_data",
+                "description": "Get KPI data by quarter",
+                "parameters": {
+                  "type": "object",
+                  "properties": {
+                    "year": {
+                      "type": "string",
+                      "description": "Input the year"
+                    },
+                    "quarter": {
+                      "type": "string",
+                      "description": "Input the quarter (e.g., 1, 2, etc.)"
+                    },
+                    "dep": {
+                      "type": "string",
+                      "description": "Department code"
+                    }
+                  },
+                  "required": [
+                    "year",
+                    "quarter",
+                    "dep"
+                  ]
+                }
+              },
+              {
+                "name": "send_email_with_attachment",
+                "description": "send email",
+                "parameters": {
+                  "type": "object",
+                  "properties": {},
+                  "required": []
+                }
+              }
+            ],
+            "function_call": "auto",
+            "chat_history": [
+              {
+                "inputs": {
+                  "question": "What is the weather like in Boston?"
+                },
+                "outputs": {
+                  "answer": "{\"forecast\":[\"sunny\",\"windy\"],\"location\":\"Boston\",\"temperature\":\"72\",\"unit\":\"fahrenheit\"}",
+                  "llm_output": {
+                    "content": null,
+                    "function_call": {
+                      "name": "get_current_weather",
+                      "arguments": "{\n  \"location\": \"Boston\"\n}"
+                    },
+                    "role": "assistant"
+                  }
+                }
+              },
+              {
+                "inputs": {
+                  "question": "give kpi"
+                },
+                "outputs": {
+                  "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}",
+                  "llm_output": {
+                    "content": null,
+                    "refusal": null,
+                    "role": "assistant",
+                    "function_call": {
+                      "arguments": "{}",
+                      "name": "get_data"
+                    },
+                    "tool_calls": null
+                  }
+                }
+              }
+            ],
+            "question": "give kpi of HR department",
+            "_inputs_to_escape": [
+              "chat_history",
+              "question"
+            ]
+          },
+          "output": {
+            "content": null,
+            "refusal": null,
+            "role": "assistant",
+            "function_call": {
+              "arguments": "{\"name\":\"HR\"}",
+              "name": "get_dep_data"
+            },
+            "tool_calls": null
+          },
+          "start_time": 1725561022.112037,
+          "end_time": 1725561023.400405,
+          "error": null,
+          "children": [
+            {
+              "name": "openai_chat",
+              "type": "LLM",
+              "inputs": {
+                "model": "AI_for_Business",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are an AI that collect KPI data for bussiness by running read file function. When you are asked for KPI, you run the function without any parameter.\nBecause the data is a KPI report in json, you must display it in table or readable format."
+                  },
+                  {
+                    "role": "user",
+                    "content": "What is the weather like in Boston?"
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Function generation requested, function = get_current_weather, args = {\n  \"location\": \"Boston\"\n}"
+                  },
+                  {
+                    "role": "function",
+                    "name": "get_current_weather",
+                    "content": "{\"forecast\":[\"sunny\",\"windy\"],\"location\":\"Boston\",\"temperature\":\"72\",\"unit\":\"fahrenheit\"}"
+                  },
+                  {
+                    "role": "user",
+                    "content": "give kpi"
+                  },
+                  {
+                    "role": "assistant",
+                    "content": "Function generation requested, function = get_data, args = {}"
+                  },
+                  {
+                    "role": "function",
+                    "name": "get_data",
+                    "content": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}"
+                  },
+                  {
+                    "role": "user",
+                    "content": "give kpi of HR department"
+                  }
+                ],
+                "temperature": 0.7,
+                "top_p": 1.0,
+                "n": 1,
+                "stream": false,
+                "presence_penalty": 0.0,
+                "frequency_penalty": 0.0,
+                "user": "",
+                "functions": [
+                  {
+                    "name": "get_data",
+                    "description": "Get KPI data",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {},
+                      "required": []
+                    }
+                  },
+                  {
+                    "name": "get_prediction_data",
+                    "description": "Get prediction KPI data",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {},
+                      "required": []
+                    }
+                  },
+                  {
+                    "name": "get_dep_data",
+                    "description": "Get dep data",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Input name of dep"
+                        }
+                      },
+                      "required": [
+                        "name"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "get_date_data",
+                    "description": "Get KPI data by date",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "description": "Input the date in format dd/MM/yyyy"
+                        },
+                        "dep": {
+                          "type": "string",
+                          "description": "Department code"
+                        }
+                      },
+                      "required": [
+                        "date",
+                        "dep"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "get_month_of_year_data",
+                    "description": "Get KPI data by month",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "month": {
+                          "type": "string",
+                          "description": "Input the month"
+                        },
+                        "year": {
+                          "type": "string",
+                          "description": "Input the year"
+                        },
+                        "dep": {
+                          "type": "string",
+                          "description": "Department code"
+                        }
+                      },
+                      "required": [
+                        "month",
+                        "year",
+                        "dep"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "get_year_data",
+                    "description": "Get KPI data by year",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "year": {
+                          "type": "string",
+                          "description": "Input the year"
+                        },
+                        "dep": {
+                          "type": "string",
+                          "description": "Department code"
+                        }
+                      },
+                      "required": [
+                        "year",
+                        "dep"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "get_quarter_data",
+                    "description": "Get KPI data by quarter",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {
+                        "year": {
+                          "type": "string",
+                          "description": "Input the year"
+                        },
+                        "quarter": {
+                          "type": "string",
+                          "description": "Input the quarter (e.g., 1, 2, etc.)"
+                        },
+                        "dep": {
+                          "type": "string",
+                          "description": "Department code"
+                        }
+                      },
+                      "required": [
+                        "year",
+                        "quarter",
+                        "dep"
+                      ]
+                    }
+                  },
+                  {
+                    "name": "send_email_with_attachment",
+                    "description": "send email",
+                    "parameters": {
+                      "type": "object",
+                      "properties": {},
+                      "required": []
+                    }
+                  }
+                ],
+                "function_call": "auto",
+                "response_format": {
+                  "type": "text"
+                }
+              },
+              "output": {
+                "id": "chatcmpl-A4I5n4qE4ilJoNt3fD7mZRo6u86CI",
+                "choices": [
+                  {
+                    "finish_reason": "function_call",
+                    "index": 0,
+                    "logprobs": null,
+                    "message": {
+                      "content": null,
+                      "refusal": null,
+                      "role": "assistant",
+                      "function_call": {
+                        "arguments": "{\"name\":\"HR\"}",
+                        "name": "get_dep_data"
+                      },
+                      "tool_calls": null
+                    },
+                    "content_filter_results": {}
+                  }
+                ],
+                "created": 1725586223,
+                "model": "gpt-4o-2024-05-13",
+                "object": "chat.completion",
+                "service_tier": null,
+                "system_fingerprint": "fp_abc28019ad",
+                "usage": {
+                  "completion_tokens": 15,
+                  "prompt_tokens": 539,
+                  "total_tokens": 554
+                },
+                "prompt_filter_results": [
+                  {
+                    "prompt_index": 0,
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "jailbreak": {
+                        "filtered": false,
+                        "detected": false
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ]
+              },
+              "start_time": 1725561022.118055,
+              "end_time": 1725561023.399846,
+              "error": null,
+              "children": [],
+              "node_name": null,
+              "parent_id": "ffd285ac-c7fb-4576-862f-0f8c786b677c",
+              "id": "30d9bdab-30ae-4d65-ad4d-1a763bc87959",
+              "function": "openai.resources.chat.completions.Completions.create",
+              "system_metrics": {
+                "completion_tokens": 15,
+                "prompt_tokens": 539,
+                "total_tokens": 554
+              }
+            }
+          ],
+          "node_name": "use_functions_with_chat_models",
+          "parent_id": "",
+          "id": "ffd285ac-c7fb-4576-862f-0f8c786b677c",
+          "function": "AzureOpenAI.chat",
+          "system_metrics": {
+            "completion_tokens": 15,
+            "prompt_tokens": 539,
+            "total_tokens": 554
+          }
+        }
+      ],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "completion_tokens": 15,
+        "prompt_tokens": 539,
+        "total_tokens": 554,
+        "duration": 1.294002
+      },
+      "result": {
+        "content": null,
+        "refusal": null,
+        "role": "assistant",
+        "function_call": {
+          "arguments": "{\"name\":\"HR\"}",
+          "name": "get_dep_data"
+        },
+        "tool_calls": null
+      },
+      "message_format": "basic"
+    },
+    {
+      "node": "run_function",
+      "flow_run_id": "937f6e32-5d3b-4f30-8657-dd33401a4dc1",
+      "run_id": "937f6e32-5d3b-4f30-8657-dd33401a4dc1_run_function_0",
+      "status": "Completed",
+      "inputs": {
+        "response_message": {
+          "content": null,
+          "refusal": null,
+          "role": "assistant",
+          "function_call": {
+            "arguments": "{\"name\":\"HR\"}",
+            "name": "get_dep_data"
+          },
+          "tool_calls": null
+        }
+      },
+      "output": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3,\"3\":4,\"4\":5,\"5\":6,\"6\":7,\"7\":8,\"8\":9,\"9\":10,\"10\":11,\"11\":12},\"Date\":{\"0\":\"01\\/08\\/2024\",\"1\":\"01\\/08\\/2024\",\"2\":\"01\\/08\\/2024\",\"3\":\"01\\/08\\/2024\",\"4\":\"08\\/08\\/2024\",\"5\":\"08\\/08\\/2024\",\"6\":\"08\\/08\\/2024\",\"7\":\"08\\/08\\/2024\",\"8\":\"08\\/08\\/2023\",\"9\":\"08\\/08\\/2023\",\"10\":\"08\\/08\\/2023\",\"11\":\"08\\/08\\/2023\"},\"KPI\":{\"0\":\"Employee Retention\",\"1\":\"New Hires\",\"2\":\"Training Hours\",\"3\":\"Employee Satisfaction\",\"4\":\"Employee Retention\",\"5\":\"New Hires\",\"6\":\"Training Hours\",\"7\":\"Employee Satisfaction\",\"8\":\"Employee Retention\",\"9\":\"New Hires\",\"10\":\"Training Hours\",\"11\":\"Employee Satisfaction\"},\"Unit\":{\"0\":\"Percent\",\"1\":\"People\",\"2\":\"Hour\",\"3\":\"Percent\",\"4\":\"Percent\",\"5\":\"People\",\"6\":\"Hour\",\"7\":\"Percent\",\"8\":\"Percent\",\"9\":\"People\",\"10\":\"Hour\",\"11\":\"Percent\"},\"Target\":{\"0\":98,\"1\":10,\"2\":30,\"3\":85,\"4\":51,\"5\":49,\"6\":47,\"7\":100,\"8\":43,\"9\":41,\"10\":39,\"11\":100},\"Actual\":{\"0\":97,\"1\":8,\"2\":20,\"3\":80,\"4\":41,\"5\":37,\"6\":33,\"7\":29,\"8\":40,\"9\":20,\"10\":18,\"11\":50},\"Pecentage\":{\"0\":0.9897959184,\"1\":0.8,\"2\":0.6666666667,\"3\":0.9411764706,\"4\":0.8039215686,\"5\":0.7551020408,\"6\":0.7021276596,\"7\":0.29,\"8\":0.9302325581,\"9\":0.487804878,\"10\":0.4615384615,\"11\":0.5}}",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "937f6e32-5d3b-4f30-8657-dd33401a4dc1_0",
+      "start_time": "2024-09-06T01:30:23.407103Z",
+      "end_time": "2024-09-06T01:30:25.274735Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "run_function",
+          "type": "Function",
+          "inputs": {
+            "response_message": {
+              "content": null,
+              "refusal": null,
+              "role": "assistant",
+              "function_call": {
+                "arguments": "{\"name\":\"HR\"}",
+                "name": "get_dep_data"
+              },
+              "tool_calls": null
+            }
+          },
+          "output": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3,\"3\":4,\"4\":5,\"5\":6,\"6\":7,\"7\":8,\"8\":9,\"9\":10,\"10\":11,\"11\":12},\"Date\":{\"0\":\"01\\/08\\/2024\",\"1\":\"01\\/08\\/2024\",\"2\":\"01\\/08\\/2024\",\"3\":\"01\\/08\\/2024\",\"4\":\"08\\/08\\/2024\",\"5\":\"08\\/08\\/2024\",\"6\":\"08\\/08\\/2024\",\"7\":\"08\\/08\\/2024\",\"8\":\"08\\/08\\/2023\",\"9\":\"08\\/08\\/2023\",\"10\":\"08\\/08\\/2023\",\"11\":\"08\\/08\\/2023\"},\"KPI\":{\"0\":\"Employee Retention\",\"1\":\"New Hires\",\"2\":\"Training Hours\",\"3\":\"Employee Satisfaction\",\"4\":\"Employee Retention\",\"5\":\"New Hires\",\"6\":\"Training Hours\",\"7\":\"Employee Satisfaction\",\"8\":\"Employee Retention\",\"9\":\"New Hires\",\"10\":\"Training Hours\",\"11\":\"Employee Satisfaction\"},\"Unit\":{\"0\":\"Percent\",\"1\":\"People\",\"2\":\"Hour\",\"3\":\"Percent\",\"4\":\"Percent\",\"5\":\"People\",\"6\":\"Hour\",\"7\":\"Percent\",\"8\":\"Percent\",\"9\":\"People\",\"10\":\"Hour\",\"11\":\"Percent\"},\"Target\":{\"0\":98,\"1\":10,\"2\":30,\"3\":85,\"4\":51,\"5\":49,\"6\":47,\"7\":100,\"8\":43,\"9\":41,\"10\":39,\"11\":100},\"Actual\":{\"0\":97,\"1\":8,\"2\":20,\"3\":80,\"4\":41,\"5\":37,\"6\":33,\"7\":29,\"8\":40,\"9\":20,\"10\":18,\"11\":50},\"Pecentage\":{\"0\":0.9897959184,\"1\":0.8,\"2\":0.6666666667,\"3\":0.9411764706,\"4\":0.8039215686,\"5\":0.7551020408,\"6\":0.7021276596,\"7\":0.29,\"8\":0.9302325581,\"9\":0.487804878,\"10\":0.4615384615,\"11\":0.5}}",
+          "start_time": 1725561023.407183,
+          "end_time": 1725561025.274537,
+          "error": null,
+          "children": [],
+          "node_name": "run_function",
+          "parent_id": "",
+          "id": "ac7dc1e4-b154-41fa-8a63-c35a05bea4e9",
+          "function": "run_function",
+          "system_metrics": {}
+        }
+      ],
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "[2024-09-06T01:30:23+0000] {'name': 'HR'}\n",
+        "stderr": "[2024-09-06T01:30:25+0000] /Users/quang/Desktop/Work/Source/AI_for_Business/run_function.py:212: FutureWarning: Passing literal json to 'read_json' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.\n  df = pd.read_json(json_data)\n"
+      },
+      "system_metrics": {
+        "duration": 1.867632
+      },
+      "result": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3,\"3\":4,\"4\":5,\"5\":6,\"6\":7,\"7\":8,\"8\":9,\"9\":10,\"10\":11,\"11\":12},\"Date\":{\"0\":\"01\\/08\\/2024\",\"1\":\"01\\/08\\/2024\",\"2\":\"01\\/08\\/2024\",\"3\":\"01\\/08\\/2024\",\"4\":\"08\\/08\\/2024\",\"5\":\"08\\/08\\/2024\",\"6\":\"08\\/08\\/2024\",\"7\":\"08\\/08\\/2024\",\"8\":\"08\\/08\\/2023\",\"9\":\"08\\/08\\/2023\",\"10\":\"08\\/08\\/2023\",\"11\":\"08\\/08\\/2023\"},\"KPI\":{\"0\":\"Employee Retention\",\"1\":\"New Hires\",\"2\":\"Training Hours\",\"3\":\"Employee Satisfaction\",\"4\":\"Employee Retention\",\"5\":\"New Hires\",\"6\":\"Training Hours\",\"7\":\"Employee Satisfaction\",\"8\":\"Employee Retention\",\"9\":\"New Hires\",\"10\":\"Training Hours\",\"11\":\"Employee Satisfaction\"},\"Unit\":{\"0\":\"Percent\",\"1\":\"People\",\"2\":\"Hour\",\"3\":\"Percent\",\"4\":\"Percent\",\"5\":\"People\",\"6\":\"Hour\",\"7\":\"Percent\",\"8\":\"Percent\",\"9\":\"People\",\"10\":\"Hour\",\"11\":\"Percent\"},\"Target\":{\"0\":98,\"1\":10,\"2\":30,\"3\":85,\"4\":51,\"5\":49,\"6\":47,\"7\":100,\"8\":43,\"9\":41,\"10\":39,\"11\":100},\"Actual\":{\"0\":97,\"1\":8,\"2\":20,\"3\":80,\"4\":41,\"5\":37,\"6\":33,\"7\":29,\"8\":40,\"9\":20,\"10\":18,\"11\":50},\"Pecentage\":{\"0\":0.9897959184,\"1\":0.8,\"2\":0.6666666667,\"3\":0.9411764706,\"4\":0.8039215686,\"5\":0.7551020408,\"6\":0.7021276596,\"7\":0.29,\"8\":0.9302325581,\"9\":0.487804878,\"10\":0.4615384615,\"11\":0.5}}",
+      "message_format": "basic"
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+id: use_functions_with_chat_models
+name: Use Functions with Chat Models
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  chat_history:
+    type: list
+    default:
+    - inputs:
+        question: What is the weather like in Boston?
+      outputs:
+        answer: '{"forecast":["sunny","windy"],"location":"Boston","temperature":"72","unit":"fahrenheit"}'
+        llm_output:
+          content: null
+          function_call:
+            name: get_current_weather
+            arguments: |-
+              {
+                "location": "Boston"
+              }
+          role: assistant
+    is_chat_input: false
+    is_chat_history: true
+  question:
+    type: string
+    default: Who are you
+    is_chat_input: true
+outputs:
+  answer:
+    type: string
+    reference: ${run_function.output}
+    is_chat_output: true
+  llm_output:
+    type: object
+    reference: ${use_functions_with_chat_models.output}
+nodes:
+- name: run_function
+  type: python
+  source:
+    type: code
+    path: run_function.py
+  inputs:
+    response_message: ${use_functions_with_chat_models.output}
+  use_variants: false
+- name: use_functions_with_chat_models
+  type: llm
+  source:
+    type: code
+    path: use_functions_with_chat_models.jinja2
+  inputs:
+    deployment_name: AI_for_Business
+    temperature: 0.7
+    top_p: 1
+    response_format:
+      type: text
+    functions:
+    - name: get_data
+      description: Get KPI data
+      parameters:
+        type: object
+        properties: {}
+        required: []
+    - name: get_prediction_data
+      description: Get prediction KPI data
+      parameters:
+        type: object
+        properties: {}
+        required: []
+    - name: get_dep_data
+      description: Get dep data
+      parameters:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Input name of dep
+        required:
+        - name
+    - name: get_date_data
+      description: Get KPI data by date
+      parameters:
+        type: object
+        properties:
+          date:
+            type: string
+            description: Input the date in format dd/MM/yyyy
+          dep:
+            type: string
+            description: Department code
+        required:
+        - date
+        - dep
+    - name: get_month_of_year_data
+      description: Get KPI data by month
+      parameters:
+        type: object
+        properties:
+          month:
+            type: string
+            description: Input the month
+          year:
+            type: string
+            description: Input the year
+          dep:
+            type: string
+            description: Department code
+        required:
+        - month
+        - year
+        - dep
+    - name: get_year_data
+      description: Get KPI data by year
+      parameters:
+        type: object
+        properties:
+          year:
+            type: string
+            description: Input the year
+          dep:
+            type: string
+            description: Department code
+        required:
+        - year
+        - dep
+    - name: get_quarter_data
+      description: Get KPI data by quarter
+      parameters:
+        type: object
+        properties:
+          year:
+            type: string
+            description: Input the year
+          quarter:
+            type: string
+            description: Input the quarter (e.g., 1, 2, etc.)
+          dep:
+            type: string
+            description: Department code
+        required:
+        - year
+        - quarter
+        - dep
+    - name: send_email_with_attachment
+      description: send email
+      parameters:
+        type: object
+        properties: {}
+        required: []
+    function_call: auto
+    chat_history: ${inputs.chat_history}
+    question: ${inputs.question}
+  connection: open_ai_connection
+  api: chat
+  use_variants: false
