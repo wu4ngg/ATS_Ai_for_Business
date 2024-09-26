@@ -33,3 +33,8 @@ secrets.txt
 
 # ignore docker folder
 /docker/
+
+.venv/
+
+.conda/
+.venv/bin/

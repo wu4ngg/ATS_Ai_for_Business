@@ -2,3 +2,6 @@ promptflow
 azure-storage-blob
 azureml.core
 pyodbc
+setuptools
+promptflow-tools
+openpyxl

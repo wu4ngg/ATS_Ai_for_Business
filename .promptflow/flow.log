@@ -1,14 +1,11 @@
-2024-09-25 15:19:52 +0700   80761 execution.flow     INFO     Start executing nodes in thread pool mode.
-2024-09-25 15:19:52 +0700   80761 execution.flow     INFO     Start to run 2 nodes with concurrency level 16.
-2024-09-25 15:19:52 +0700   80761 execution.flow     INFO     Executing node use_functions_with_chat_models. node run id: dd6b08c9-1e28-4b5b-a632-33a0d2111a81_use_functions_with_chat_models_0
-2024-09-25 15:19:54 +0700   80761 execution.flow     INFO     Node use_functions_with_chat_models completes.
-2024-09-25 15:19:54 +0700   80761 execution.flow     INFO     Executing node run_function. node run id: dd6b08c9-1e28-4b5b-a632-33a0d2111a81_run_function_0
-2024-09-25 15:19:54 +0700   80761 execution.flow     INFO     [run_function in line 0 (index starts from 0)] stdout> No function call
-2024-09-25 15:19:54 +0700   80761 execution.flow     INFO     Node run_function completes.
-2024-09-25 15:20:07 +0700   80761 execution.flow     INFO     Start executing nodes in thread pool mode.
-2024-09-25 15:20:07 +0700   80761 execution.flow     INFO     Start to run 2 nodes with concurrency level 16.
-2024-09-25 15:20:07 +0700   80761 execution.flow     INFO     Executing node use_functions_with_chat_models. node run id: 1a7ac89c-3f17-4109-b84f-14064267eceb_use_functions_with_chat_models_0
-2024-09-25 15:20:11 +0700   80761 execution.flow     INFO     Node use_functions_with_chat_models completes.
-2024-09-25 15:20:11 +0700   80761 execution.flow     INFO     Executing node run_function. node run id: 1a7ac89c-3f17-4109-b84f-14064267eceb_run_function_0
-2024-09-25 15:20:11 +0700   80761 execution.flow     INFO     [run_function in line 0 (index starts from 0)] stdout> No function call
-2024-09-25 15:20:11 +0700   80761 execution.flow     INFO     Node run_function completes.
+2024-09-26 14:32:41 +0700    4108 execution.flow     INFO     Start executing nodes in thread pool mode.
+2024-09-26 14:32:41 +0700    4108 execution.flow     INFO     Start to run 2 nodes with concurrency level 16.
+2024-09-26 14:32:41 +0700    4108 execution.flow     INFO     Executing node use_functions_with_chat_models. node run id: e9dabc39-2175-4756-acd4-1fb46a081b0b_use_functions_with_chat_models_0
+2024-09-26 14:32:43 +0700    4108 execution.flow     WARNING  Failed to calculate metrics due to exception: unsupported operand type(s) for +: 'int' and 'NoneType'.
+2024-09-26 14:32:43 +0700    4108 execution.flow     INFO     Node use_functions_with_chat_models completes.
+2024-09-26 14:32:43 +0700    4108 execution.flow     INFO     Executing node run_function. node run id: e9dabc39-2175-4756-acd4-1fb46a081b0b_run_function_0
+2024-09-26 14:32:43 +0700    4108 execution.flow     INFO     [run_function in line 0 (index starts from 0)] stdout> {}
+2024-09-26 14:32:45 +0700    4108 execution          WARNING  [run_function in line 0 (index starts from 0)] stderr> D:\AI_for_Business\run_function.py:212: FutureWarning: Passing literal json to 'read_json' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
+  df = pd.read_json(json_data)
+2024-09-26 14:32:45 +0700    4108 execution.flow     INFO     Node run_function completes.
+2024-09-26 14:32:56 +0700    4108 execution.flow     INFO     Received signal 2(SIGINT), start to exit sync flow execution.

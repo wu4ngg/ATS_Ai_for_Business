@@ -16,12 +16,12 @@
     "use_functions_with_chat_models.jinja2": {
       "type": "llm",
       "inputs": {
-        "question": {
+        "chat_history": {
           "type": [
             "string"
           ]
         },
-        "chat_history": {
+        "question": {
           "type": [
             "string"
           ]

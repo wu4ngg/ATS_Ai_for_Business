@@ -1,41 +1,32 @@
 {
   "flow_runs": [
     {
-      "run_id": "1a7ac89c-3f17-4109-b84f-14064267eceb_0",
+      "run_id": "e9dabc39-2175-4756-acd4-1fb46a081b0b_0",
       "status": "Completed",
       "error": null,
       "inputs": {
-        "chat_history": [
-          {
-            "inputs": {
-              "question": "{You collect KPI data by running a read file function. When asked for KPI, run the function with no parameters and display the JSON report in a readable format or table. If provided CSV in braces, convert i}"
-            },
-            "outputs": {
-              "answer": "It seems like your message got cut off. Can you please provide the complete details?"
-            }
-          }
-        ],
-        "question": "{NAME,STATUS,PLAN,RESOURCE GROUP,LOCATION,SUBSCRIPTION,\"ai-logic-app\",\"Enabled\",\"Consumption\",\"chatbot\",\"Australia East\",\"Azure subscription 1\"}"
+        "chat_history": [],
+        "question": "give kpi"
       },
       "output": {
-        "answer": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```"
+        "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}"
       },
       "metrics": null,
       "request": null,
-      "parent_run_id": "1a7ac89c-3f17-4109-b84f-14064267eceb",
-      "root_run_id": "1a7ac89c-3f17-4109-b84f-14064267eceb",
+      "parent_run_id": "e9dabc39-2175-4756-acd4-1fb46a081b0b",
+      "root_run_id": "e9dabc39-2175-4756-acd4-1fb46a081b0b",
       "source_run_id": null,
       "flow_id": "use_functions_with_chat_models",
-      "start_time": "2024-09-25T08:20:07.577727Z",
-      "end_time": "2024-09-25T08:20:11.447058Z",
+      "start_time": "2024-09-26T07:32:41.670647Z",
+      "end_time": "2024-09-26T07:32:45.218153Z",
       "index": 0,
       "api_calls": [
         {
           "name": "flow",
           "node_name": "flow",
           "type": "Flow",
-          "start_time": 1727227207.577727,
-          "end_time": 1727227211.447058,
+          "start_time": 1727310761.670647,
+          "end_time": 1727310765.218153,
           "children": [
             {
               "name": "AzureOpenAI.chat",
@@ -188,31 +179,25 @@
                   }
                 ],
                 "function_call": "auto",
-                "chat_history": [
-                  {
-                    "inputs": {
-                      "question": "{You collect KPI data by running a read file function. When asked for KPI, run the function with no parameters and display the JSON report in a readable format or table. If provided CSV in braces, convert i}"
-                    },
-                    "outputs": {
-                      "answer": "It seems like your message got cut off. Can you please provide the complete details?"
-                    }
-                  }
-                ],
-                "question": "{NAME,STATUS,PLAN,RESOURCE GROUP,LOCATION,SUBSCRIPTION,\"ai-logic-app\",\"Enabled\",\"Consumption\",\"chatbot\",\"Australia East\",\"Azure subscription 1\"}",
+                "chat_history": [],
+                "question": "give kpi",
                 "_inputs_to_escape": [
                   "chat_history",
                   "question"
                 ]
               },
               "output": {
-                "content": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
+                "content": null,
                 "refusal": null,
                 "role": "assistant",
-                "function_call": null,
+                "function_call": {
+                  "arguments": "{}",
+                  "name": "get_data"
+                },
                 "tool_calls": null
               },
-              "start_time": 1727227207.580214,
-              "end_time": 1727227211.440696,
+              "start_time": 1727310761.671647,
+              "end_time": 1727310763.159294,
               "error": null,
               "children": [
                 {
@@ -227,15 +212,7 @@
                       },
                       {
                         "role": "user",
-                        "content": "{You collect KPI data by running a read file function. When asked for KPI, run the function with no parameters and display the JSON report in a readable format or table. If provided CSV in braces, convert i}"
-                      },
-                      {
-                        "role": "assistant",
-                        "content": ""
-                      },
-                      {
-                        "role": "user",
-                        "content": "{NAME,STATUS,PLAN,RESOURCE GROUP,LOCATION,SUBSCRIPTION,\"ai-logic-app\",\"Enabled\",\"Consumption\",\"chatbot\",\"Australia East\",\"Azure subscription 1\"}"
+                        "content": "give kpi"
                       }
                     ],
                     "temperature": 0.7,
@@ -390,56 +367,35 @@
                     }
                   },
                   "output": {
-                    "id": "chatcmpl-ABHXkaJLJT0754VyZXmGgjH4wyTss",
+                    "id": "chatcmpl-ABdGyAcP3KFrJYbOYnFADhcY2i5cJ",
                     "choices": [
                       {
-                        "finish_reason": "stop",
+                        "finish_reason": "function_call",
                         "index": 0,
                         "logprobs": null,
                         "message": {
-                          "content": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
+                          "content": null,
                           "refusal": null,
                           "role": "assistant",
-                          "function_call": null,
+                          "function_call": {
+                            "arguments": "{}",
+                            "name": "get_data"
+                          },
                           "tool_calls": null
                         },
-                        "content_filter_results": {
-                          "hate": {
-                            "filtered": false,
-                            "severity": "safe"
-                          },
-                          "protected_material_code": {
-                            "filtered": false,
-                            "detected": false
-                          },
-                          "protected_material_text": {
-                            "filtered": false,
-                            "detected": false
-                          },
-                          "self_harm": {
-                            "filtered": false,
-                            "severity": "safe"
-                          },
-                          "sexual": {
-                            "filtered": false,
-                            "severity": "safe"
-                          },
-                          "violence": {
-                            "filtered": false,
-                            "severity": "safe"
-                          }
-                        }
+                        "content_filter_results": {}
                       }
                     ],
-                    "created": 1727252408,
+                    "created": 1727335936,
                     "model": "gpt-4-32k",
                     "object": "chat.completion",
                     "service_tier": null,
                     "system_fingerprint": null,
                     "usage": {
-                      "completion_tokens": 69,
-                      "prompt_tokens": 421,
-                      "total_tokens": 490
+                      "completion_tokens": 7,
+                      "prompt_tokens": 335,
+                      "total_tokens": 342,
+                      "completion_tokens_details": null
                     },
                     "prompt_filter_results": [
                       {
@@ -469,29 +425,29 @@
                       }
                     ]
                   },
-                  "start_time": 1727227207.585079,
-                  "end_time": 1727227211.440124,
+                  "start_time": 1727310761.676752,
+                  "end_time": 1727310763.158249,
                   "error": null,
                   "children": [],
                   "node_name": null,
-                  "parent_id": "76c38213-1b12-4d5b-a8d8-7157d8c76f68",
-                  "id": "82c56811-df2c-440d-8e23-15a1a9a0a1f6",
+                  "parent_id": "7d3500d0-763c-4029-8d93-f90a8b46a899",
+                  "id": "5b45c40b-5167-49df-9d19-f91671ae1edd",
                   "function": "openai.resources.chat.completions.Completions.create",
                   "system_metrics": {
-                    "completion_tokens": 69,
-                    "prompt_tokens": 421,
-                    "total_tokens": 490
+                    "completion_tokens": 7,
+                    "prompt_tokens": 335,
+                    "total_tokens": 342
                   }
                 }
               ],
               "node_name": "use_functions_with_chat_models",
               "parent_id": "",
-              "id": "76c38213-1b12-4d5b-a8d8-7157d8c76f68",
+              "id": "7d3500d0-763c-4029-8d93-f90a8b46a899",
               "function": "AzureOpenAI.chat",
               "system_metrics": {
-                "completion_tokens": 69,
-                "prompt_tokens": 421,
-                "total_tokens": 490
+                "completion_tokens": 7,
+                "prompt_tokens": 335,
+                "total_tokens": 342
               }
             },
             {
@@ -499,46 +455,40 @@
               "type": "Function",
               "inputs": {
                 "response_message": {
-                  "content": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
+                  "content": null,
                   "refusal": null,
                   "role": "assistant",
-                  "function_call": null,
+                  "function_call": {
+                    "arguments": "{}",
+                    "name": "get_data"
+                  },
                   "tool_calls": null
                 }
               },
-              "output": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
-              "start_time": 1727227211.445324,
-              "end_time": 1727227211.446301,
+              "output": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}",
+              "start_time": 1727310763.161251,
+              "end_time": 1727310765.218153,
               "error": null,
               "children": [],
               "node_name": "run_function",
               "parent_id": "",
-              "id": "177fd04e-0aa9-489b-92b5-98c502dbca1a",
+              "id": "0cdf0563-6aac-44a1-a632-6d4dce10d0ec",
               "function": "run_function",
               "system_metrics": {}
             }
           ],
           "system_metrics": {
-            "duration": 3.869331,
-            "prompt_tokens": 421,
-            "completion_tokens": 69,
-            "total_tokens": 490
+            "duration": 3.547506,
+            "prompt_tokens": 335,
+            "completion_tokens": 7,
+            "total_tokens": 342
           },
           "inputs": {
-            "chat_history": [
-              {
-                "inputs": {
-                  "question": "{You collect KPI data by running a read file function. When asked for KPI, run the function with no parameters and display the JSON report in a readable format or table. If provided CSV in braces, convert i}"
-                },
-                "outputs": {
-                  "answer": "It seems like your message got cut off. Can you please provide the complete details?"
-                }
-              }
-            ],
-            "question": "{NAME,STATUS,PLAN,RESOURCE GROUP,LOCATION,SUBSCRIPTION,\"ai-logic-app\",\"Enabled\",\"Consumption\",\"chatbot\",\"Australia East\",\"Azure subscription 1\"}"
+            "chat_history": [],
+            "question": "give kpi"
           },
           "output": {
-            "answer": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```"
+            "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}"
           },
           "error": null
         }
@@ -547,24 +497,24 @@
       "description": "",
       "tags": null,
       "system_metrics": {
-        "duration": 3.869331,
-        "prompt_tokens": 421,
-        "completion_tokens": 69,
-        "total_tokens": 490
+        "duration": 3.547506,
+        "prompt_tokens": 335,
+        "completion_tokens": 7,
+        "total_tokens": 342
       },
       "result": {
-        "answer": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```"
+        "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}"
       },
       "upload_metrics": false,
-      "otel_trace_id": "0xa93144bcac3cec3e817b991d8f35892b",
+      "otel_trace_id": "0x79494fa8a183b0fb10ade099713e15be",
       "message_format": "basic"
     }
   ],
   "node_runs": [
     {
       "node": "use_functions_with_chat_models",
-      "flow_run_id": "1a7ac89c-3f17-4109-b84f-14064267eceb",
-      "run_id": "1a7ac89c-3f17-4109-b84f-14064267eceb_use_functions_with_chat_models_0",
+      "flow_run_id": "e9dabc39-2175-4756-acd4-1fb46a081b0b",
+      "run_id": "e9dabc39-2175-4756-acd4-1fb46a081b0b_use_functions_with_chat_models_0",
       "status": "Completed",
       "inputs": {
         "deployment_name": "AI_for_Business",
@@ -713,34 +663,28 @@
           }
         ],
         "function_call": "auto",
-        "chat_history": [
-          {
-            "inputs": {
-              "question": "{You collect KPI data by running a read file function. When asked for KPI, run the function with no parameters and display the JSON report in a readable format or table. If provided CSV in braces, convert i}"
-            },
-            "outputs": {
-              "answer": "It seems like your message got cut off. Can you please provide the complete details?"
-            }
-          }
-        ],
-        "question": "{NAME,STATUS,PLAN,RESOURCE GROUP,LOCATION,SUBSCRIPTION,\"ai-logic-app\",\"Enabled\",\"Consumption\",\"chatbot\",\"Australia East\",\"Azure subscription 1\"}",
+        "chat_history": [],
+        "question": "give kpi",
         "_inputs_to_escape": [
           "chat_history",
           "question"
         ]
       },
       "output": {
-        "content": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
+        "content": null,
         "refusal": null,
         "role": "assistant",
-        "function_call": null,
+        "function_call": {
+          "arguments": "{}",
+          "name": "get_data"
+        },
         "tool_calls": null
       },
       "metrics": null,
       "error": null,
-      "parent_run_id": "1a7ac89c-3f17-4109-b84f-14064267eceb_0",
-      "start_time": "2024-09-25T08:20:07.579912Z",
-      "end_time": "2024-09-25T08:20:11.443658Z",
+      "parent_run_id": "e9dabc39-2175-4756-acd4-1fb46a081b0b_0",
+      "start_time": "2024-09-26T07:32:41.671647Z",
+      "end_time": "2024-09-26T07:32:43.160352Z",
       "index": 0,
       "api_calls": [
         {
@@ -894,31 +838,25 @@
               }
             ],
             "function_call": "auto",
-            "chat_history": [
-              {
-                "inputs": {
-                  "question": "{You collect KPI data by running a read file function. When asked for KPI, run the function with no parameters and display the JSON report in a readable format or table. If provided CSV in braces, convert i}"
-                },
-                "outputs": {
-                  "answer": "It seems like your message got cut off. Can you please provide the complete details?"
-                }
-              }
-            ],
-            "question": "{NAME,STATUS,PLAN,RESOURCE GROUP,LOCATION,SUBSCRIPTION,\"ai-logic-app\",\"Enabled\",\"Consumption\",\"chatbot\",\"Australia East\",\"Azure subscription 1\"}",
+            "chat_history": [],
+            "question": "give kpi",
             "_inputs_to_escape": [
               "chat_history",
               "question"
             ]
           },
           "output": {
-            "content": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
+            "content": null,
             "refusal": null,
             "role": "assistant",
-            "function_call": null,
+            "function_call": {
+              "arguments": "{}",
+              "name": "get_data"
+            },
             "tool_calls": null
           },
-          "start_time": 1727227207.580214,
-          "end_time": 1727227211.440696,
+          "start_time": 1727310761.671647,
+          "end_time": 1727310763.159294,
           "error": null,
           "children": [
             {
@@ -933,15 +871,7 @@
                   },
                   {
                     "role": "user",
-                    "content": "{You collect KPI data by running a read file function. When asked for KPI, run the function with no parameters and display the JSON report in a readable format or table. If provided CSV in braces, convert i}"
-                  },
-                  {
-                    "role": "assistant",
-                    "content": ""
-                  },
-                  {
-                    "role": "user",
-                    "content": "{NAME,STATUS,PLAN,RESOURCE GROUP,LOCATION,SUBSCRIPTION,\"ai-logic-app\",\"Enabled\",\"Consumption\",\"chatbot\",\"Australia East\",\"Azure subscription 1\"}"
+                    "content": "give kpi"
                   }
                 ],
                 "temperature": 0.7,
@@ -1096,56 +1026,35 @@
                 }
               },
               "output": {
-                "id": "chatcmpl-ABHXkaJLJT0754VyZXmGgjH4wyTss",
+                "id": "chatcmpl-ABdGyAcP3KFrJYbOYnFADhcY2i5cJ",
                 "choices": [
                   {
-                    "finish_reason": "stop",
+                    "finish_reason": "function_call",
                     "index": 0,
                     "logprobs": null,
                     "message": {
-                      "content": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
+                      "content": null,
                       "refusal": null,
                       "role": "assistant",
-                      "function_call": null,
+                      "function_call": {
+                        "arguments": "{}",
+                        "name": "get_data"
+                      },
                       "tool_calls": null
                     },
-                    "content_filter_results": {
-                      "hate": {
-                        "filtered": false,
-                        "severity": "safe"
-                      },
-                      "protected_material_code": {
-                        "filtered": false,
-                        "detected": false
-                      },
-                      "protected_material_text": {
-                        "filtered": false,
-                        "detected": false
-                      },
-                      "self_harm": {
-                        "filtered": false,
-                        "severity": "safe"
-                      },
-                      "sexual": {
-                        "filtered": false,
-                        "severity": "safe"
-                      },
-                      "violence": {
-                        "filtered": false,
-                        "severity": "safe"
-                      }
-                    }
+                    "content_filter_results": {}
                   }
                 ],
-                "created": 1727252408,
+                "created": 1727335936,
                 "model": "gpt-4-32k",
                 "object": "chat.completion",
                 "service_tier": null,
                 "system_fingerprint": null,
                 "usage": {
-                  "completion_tokens": 69,
-                  "prompt_tokens": 421,
-                  "total_tokens": 490
+                  "completion_tokens": 7,
+                  "prompt_tokens": 335,
+                  "total_tokens": 342,
+                  "completion_tokens_details": null
                 },
                 "prompt_filter_results": [
                   {
@@ -1175,29 +1084,29 @@
                   }
                 ]
               },
-              "start_time": 1727227207.585079,
-              "end_time": 1727227211.440124,
+              "start_time": 1727310761.676752,
+              "end_time": 1727310763.158249,
               "error": null,
               "children": [],
               "node_name": null,
-              "parent_id": "76c38213-1b12-4d5b-a8d8-7157d8c76f68",
-              "id": "82c56811-df2c-440d-8e23-15a1a9a0a1f6",
+              "parent_id": "7d3500d0-763c-4029-8d93-f90a8b46a899",
+              "id": "5b45c40b-5167-49df-9d19-f91671ae1edd",
               "function": "openai.resources.chat.completions.Completions.create",
               "system_metrics": {
-                "completion_tokens": 69,
-                "prompt_tokens": 421,
-                "total_tokens": 490
+                "completion_tokens": 7,
+                "prompt_tokens": 335,
+                "total_tokens": 342
               }
             }
           ],
           "node_name": "use_functions_with_chat_models",
           "parent_id": "",
-          "id": "76c38213-1b12-4d5b-a8d8-7157d8c76f68",
+          "id": "7d3500d0-763c-4029-8d93-f90a8b46a899",
           "function": "AzureOpenAI.chat",
           "system_metrics": {
-            "completion_tokens": 69,
-            "prompt_tokens": 421,
-            "total_tokens": 490
+            "completion_tokens": 7,
+            "prompt_tokens": 335,
+            "total_tokens": 342
           }
         }
       ],
@@ -1208,40 +1117,46 @@
         "stderr": ""
       },
       "system_metrics": {
-        "completion_tokens": 69,
-        "prompt_tokens": 421,
-        "total_tokens": 490,
-        "duration": 3.863746
+        "completion_tokens": 7,
+        "prompt_tokens": 335,
+        "total_tokens": 342,
+        "duration": 1.488705
       },
       "result": {
-        "content": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
+        "content": null,
         "refusal": null,
         "role": "assistant",
-        "function_call": null,
+        "function_call": {
+          "arguments": "{}",
+          "name": "get_data"
+        },
         "tool_calls": null
       },
       "message_format": "basic"
     },
     {
       "node": "run_function",
-      "flow_run_id": "1a7ac89c-3f17-4109-b84f-14064267eceb",
-      "run_id": "1a7ac89c-3f17-4109-b84f-14064267eceb_run_function_0",
+      "flow_run_id": "e9dabc39-2175-4756-acd4-1fb46a081b0b",
+      "run_id": "e9dabc39-2175-4756-acd4-1fb46a081b0b_run_function_0",
       "status": "Completed",
       "inputs": {
         "response_message": {
-          "content": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
+          "content": null,
           "refusal": null,
           "role": "assistant",
-          "function_call": null,
+          "function_call": {
+            "arguments": "{}",
+            "name": "get_data"
+          },
           "tool_calls": null
         }
       },
-      "output": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
+      "output": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}",
       "metrics": null,
       "error": null,
-      "parent_run_id": "1a7ac89c-3f17-4109-b84f-14064267eceb_0",
-      "start_time": "2024-09-25T08:20:11.445166Z",
-      "end_time": "2024-09-25T08:20:11.446561Z",
+      "parent_run_id": "e9dabc39-2175-4756-acd4-1fb46a081b0b_0",
+      "start_time": "2024-09-26T07:32:43.161251Z",
+      "end_time": "2024-09-26T07:32:45.218153Z",
       "index": 0,
       "api_calls": [
         {
@@ -1249,21 +1164,24 @@
           "type": "Function",
           "inputs": {
             "response_message": {
-              "content": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
+              "content": null,
               "refusal": null,
               "role": "assistant",
-              "function_call": null,
+              "function_call": {
+                "arguments": "{}",
+                "name": "get_data"
+              },
               "tool_calls": null
             }
           },
-          "output": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
-          "start_time": 1727227211.445324,
-          "end_time": 1727227211.446301,
+          "output": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}",
+          "start_time": 1727310763.161251,
+          "end_time": 1727310765.218153,
           "error": null,
           "children": [],
           "node_name": "run_function",
           "parent_id": "",
-          "id": "177fd04e-0aa9-489b-92b5-98c502dbca1a",
+          "id": "0cdf0563-6aac-44a1-a632-6d4dce10d0ec",
           "function": "run_function",
           "system_metrics": {}
         }
@@ -1271,13 +1189,13 @@
       "cached_run_id": null,
       "cached_flow_run_id": null,
       "logs": {
-        "stdout": "[2024-09-25T08:20:11+0000] No function call\n",
-        "stderr": ""
+        "stdout": "[2024-09-26T07:32:43+0000] {}\n",
+        "stderr": "[2024-09-26T07:32:45+0000] D:\\AI_for_Business\\run_function.py:212: FutureWarning: Passing literal json to 'read_json' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.\n  df = pd.read_json(json_data)\n"
       },
       "system_metrics": {
-        "duration": 0.001395
+        "duration": 2.056902
       },
-      "result": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```",
+      "result": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}",
       "message_format": "basic"
     }
   ]

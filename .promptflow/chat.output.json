@@ -1,3 +1,3 @@
 {
-  "answer": "Here is the CSV data converted to JSON format:\n\n```\n{\n  \"NAME\": \"ai-logic-app\",\n  \"STATUS\": \"Enabled\",\n  \"PLAN\": \"Consumption\",\n  \"RESOURCE GROUP\": \"chatbot\",\n  \"LOCATION\": \"Australia East\",\n  \"SUBSCRIPTION\": \"Azure subscription 1\"\n}\n```"
+  "answer": "{\"Num\":{\"0\":1,\"1\":2,\"2\":3},\"Department\":{\"0\":\"IT\",\"1\":\"HR\",\"2\":\"AC\"},\"Date\":{\"0\":\"08\\/08\\/2024\",\"1\":\"08\\/08\\/2024\",\"2\":\"08\\/08\\/2024\"},\"KPI\":{\"0\":\"IT01082024\",\"1\":\"HR01082024\",\"2\":\"AC01082024\"},\"KPI Num\":{\"0\":5,\"1\":4,\"2\":4},\"Pecentage\":{\"0\":0.6613333333,\"1\":0.6940305185,\"2\":0.4495958019}}"
 }
