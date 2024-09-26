@@ -5,34 +5,17 @@ environment:
 inputs:
   chat_history:
     type: list
-    default:
-    - inputs:
-        question: What is the weather like in Boston?
-      outputs:
-        answer: '{"forecast":["sunny","windy"],"location":"Boston","temperature":"72","unit":"fahrenheit"}'
-        llm_output:
-          content: null
-          function_call:
-            name: get_current_weather
-            arguments: |-
-              {
-                "location": "Boston"
-              }
-          role: assistant
     is_chat_input: false
     is_chat_history: true
   question:
     type: string
-    default: Who are you
+    default: ""
     is_chat_input: true
 outputs:
   answer:
     type: string
     reference: ${run_function.output}
     is_chat_output: true
-  llm_output:
-    type: object
-    reference: ${use_functions_with_chat_models.output}
 nodes:
 - name: run_function
   type: python
@@ -42,6 +25,7 @@ nodes:
   inputs:
     response_message: ${use_functions_with_chat_models.output}
   use_variants: false
+  aggregation: false
 - name: use_functions_with_chat_models
   type: llm
   source:

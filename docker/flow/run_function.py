@@ -13,7 +13,6 @@ from email.mime.base import MIMEBase
 from email import encoders
 from azureml.core import Workspace, Model
 
-
 url = 'https://businessai0409202401.blob.core.windows.net/demo-data/DemoKPI.xlsx'
 def get_data():
 

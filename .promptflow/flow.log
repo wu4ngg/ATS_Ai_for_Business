@@ -1,23 +1,14 @@
-2024-09-06 08:28:46 +0700   11468 execution.flow     INFO     Start executing nodes in thread pool mode.
-2024-09-06 08:28:46 +0700   11468 execution.flow     INFO     Start to run 2 nodes with concurrency level 16.
-2024-09-06 08:28:46 +0700   11468 execution.flow     INFO     Executing node use_functions_with_chat_models. node run id: 1d8d5f76-9dd8-4a20-8ef5-4886c7b34469_use_functions_with_chat_models_0
-2024-09-06 08:28:47 +0700   11468 execution          WARNING  [use_functions_with_chat_models in line 0 (index starts from 0)] stderr> Exception occurs: RateLimitError: Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-02-01 have exceeded token rate limit of your current OpenAI S0 pricing tier. Please retry after 6 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}
-2024-09-06 08:28:47 +0700   11468 execution          WARNING  [use_functions_with_chat_models in line 0 (index starts from 0)] stderr> RateLimitError #0, Retry-After=6, Back off 6.0 seconds for retry.
-2024-09-06 08:28:54 +0700   11468 execution          WARNING  [use_functions_with_chat_models in line 0 (index starts from 0)] stderr> Exception occurs: RateLimitError: Error code: 429 - {'error': {'code': '429', 'message': 'Requests to the ChatCompletions_Create Operation under Azure OpenAI API version 2024-02-01 have exceeded call rate limit of your current OpenAI S0 pricing tier. Please retry after 4 seconds. Please go here: https://aka.ms/oai/quotaincrease if you would like to further increase the default rate limit.'}}
-2024-09-06 08:28:54 +0700   11468 execution          WARNING  [use_functions_with_chat_models in line 0 (index starts from 0)] stderr> RateLimitError #1, Retry-After=4, Back off 4.0 seconds for retry.
-2024-09-06 08:28:58 +0700   11468 execution.flow     INFO     Node use_functions_with_chat_models completes.
-2024-09-06 08:28:58 +0700   11468 execution.flow     INFO     Executing node run_function. node run id: 1d8d5f76-9dd8-4a20-8ef5-4886c7b34469_run_function_0
-2024-09-06 08:28:58 +0700   11468 execution.flow     INFO     [run_function in line 0 (index starts from 0)] stdout> {}
-2024-09-06 08:29:00 +0700   11468 execution          WARNING  [run_function in line 0 (index starts from 0)] stderr> /Users/quang/Desktop/Work/Source/AI_for_Business/run_function.py:212: FutureWarning: Passing literal json to 'read_json' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
-  df = pd.read_json(json_data)
-2024-09-06 08:29:00 +0700   11468 execution.flow     INFO     Node run_function completes.
-2024-09-06 08:30:22 +0700   11468 execution.flow     INFO     Start executing nodes in thread pool mode.
-2024-09-06 08:30:22 +0700   11468 execution.flow     INFO     Start to run 2 nodes with concurrency level 16.
-2024-09-06 08:30:22 +0700   11468 execution.flow     INFO     Executing node use_functions_with_chat_models. node run id: 937f6e32-5d3b-4f30-8657-dd33401a4dc1_use_functions_with_chat_models_0
-2024-09-06 08:30:23 +0700   11468 execution.flow     INFO     Node use_functions_with_chat_models completes.
-2024-09-06 08:30:23 +0700   11468 execution.flow     INFO     Executing node run_function. node run id: 937f6e32-5d3b-4f30-8657-dd33401a4dc1_run_function_0
-2024-09-06 08:30:23 +0700   11468 execution.flow     INFO     [run_function in line 0 (index starts from 0)] stdout> {'name': 'HR'}
-2024-09-06 08:30:25 +0700   11468 execution          WARNING  [run_function in line 0 (index starts from 0)] stderr> /Users/quang/Desktop/Work/Source/AI_for_Business/run_function.py:212: FutureWarning: Passing literal json to 'read_json' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
-  df = pd.read_json(json_data)
-2024-09-06 08:30:25 +0700   11468 execution.flow     INFO     Node run_function completes.
-2024-09-06 08:35:31 +0700   11468 execution.flow     INFO     Received signal 2(SIGINT), start to exit sync flow execution.
+2024-09-25 15:19:52 +0700   80761 execution.flow     INFO     Start executing nodes in thread pool mode.
+2024-09-25 15:19:52 +0700   80761 execution.flow     INFO     Start to run 2 nodes with concurrency level 16.
+2024-09-25 15:19:52 +0700   80761 execution.flow     INFO     Executing node use_functions_with_chat_models. node run id: dd6b08c9-1e28-4b5b-a632-33a0d2111a81_use_functions_with_chat_models_0
+2024-09-25 15:19:54 +0700   80761 execution.flow     INFO     Node use_functions_with_chat_models completes.
+2024-09-25 15:19:54 +0700   80761 execution.flow     INFO     Executing node run_function. node run id: dd6b08c9-1e28-4b5b-a632-33a0d2111a81_run_function_0
+2024-09-25 15:19:54 +0700   80761 execution.flow     INFO     [run_function in line 0 (index starts from 0)] stdout> No function call
+2024-09-25 15:19:54 +0700   80761 execution.flow     INFO     Node run_function completes.
+2024-09-25 15:20:07 +0700   80761 execution.flow     INFO     Start executing nodes in thread pool mode.
+2024-09-25 15:20:07 +0700   80761 execution.flow     INFO     Start to run 2 nodes with concurrency level 16.
+2024-09-25 15:20:07 +0700   80761 execution.flow     INFO     Executing node use_functions_with_chat_models. node run id: 1a7ac89c-3f17-4109-b84f-14064267eceb_use_functions_with_chat_models_0
+2024-09-25 15:20:11 +0700   80761 execution.flow     INFO     Node use_functions_with_chat_models completes.
+2024-09-25 15:20:11 +0700   80761 execution.flow     INFO     Executing node run_function. node run id: 1a7ac89c-3f17-4109-b84f-14064267eceb_run_function_0
+2024-09-25 15:20:11 +0700   80761 execution.flow     INFO     [run_function in line 0 (index starts from 0)] stdout> No function call
+2024-09-25 15:20:11 +0700   80761 execution.flow     INFO     Node run_function completes.

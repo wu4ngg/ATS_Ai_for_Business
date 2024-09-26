@@ -3,8 +3,6 @@ FROM docker.io/continuumio/miniconda3:latest
 
 WORKDIR /
 
-ENV OPEN_AI_CONNECTION_API_KEY="b7cdb0a948c84862aee6eb8bf3cc4c02"
-
 COPY ./flow/requirements.txt /flow/requirements.txt
 
 # gcc is for build psutil in MacOS
