@@ -1,6 +1,0 @@
-promptflow
-azure-storage-blob
-azureml.core
-pyodbc
-promptflow-tools
-openpyxl
