@@ -32,4 +32,4 @@ config.ini
 secrets.txt
 
 # ignore docker folder
-docker/
+/docker/
